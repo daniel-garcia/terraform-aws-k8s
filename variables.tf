@@ -29,9 +29,9 @@ variable "aws_cidr_block" {
 }
 
 variable "aws_subnets" {
-  description = "List of 8-bit numbers of subnets base_cidr_block"
+  description = "number of subnets base_cidr_block"
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "aws_instance_type" {
@@ -41,8 +41,8 @@ variable "aws_instance_type" {
 }
 
 # variable "aws_eks_version" {
-#   description = "AWS EKS cluster version (e.g. `1.13`)"
+#   description = "AWS EKS cluster version (e.g. `1.21`)"
 #   type = string
-#   default = "1.13"
+#   default = "1.21"
 # }
 

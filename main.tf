@@ -43,7 +43,21 @@ resource "aws_subnet" "public" {
   count = var.aws_subnets
 
   availability_zone = data.aws_availability_zones.available.names[count.index]
-  cidr_block        = cidrsubnet(var.aws_cidr_block, 8, count.index)
+  cidr_block        = cidrsubnet(var.aws_cidr_block, 12, count.index)
+  vpc_id            = aws_vpc.main.id
+
+  tags = tomap({
+    "Project" = "k8s"
+    "ManagedBy" = "terraform"
+    "kubernetes.io/cluster/${var.cluster_name}-${random_id.cluster_name.hex}" = "shared"
+  })
+}
+
+resource "aws_subnet" "private" {
+  count = var.aws_subnets
+
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+  cidr_block        = cidrsubnet(var.aws_cidr_block, 12, count.index)
   vpc_id            = aws_vpc.main.id
 
   tags = tomap({
